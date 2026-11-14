@@ -1,0 +1,16 @@
+version: 1
+profiles:
+  portfolio_offline:
+    config: inventory-offline.yaml
+    desired_states:
+      baseline: desired.yaml
+    allow_live: false
+destinations:
+  example_public:
+    hostname: example.com
+    port: 443
+    schemes: [https]
+diagnostic_timeout_seconds: 5
+max_diagnostic_records: 20
+max_concurrent_diagnostics: 4
+

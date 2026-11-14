@@ -1,0 +1,6 @@
+schema_version: 1
+resources:
+  - {provider: aws, kind: vpc, id: vpc-00000000000000002, name: mcp-demo-vpc, location: eu-west-2, attributes: {cidr: 10.30.0.0/16, is_default: false, state: available}}
+  - {provider: azure, kind: virtual_network, id: /subscriptions/00000000-0000-4000-8000-000000000002/resourceGroups/rg-mcp-demo/providers/Microsoft.Network/virtualNetworks/vnet-mcp-demo, name: vnet-mcp-demo, location: uksouth, attributes: {address_prefixes: [10.40.0.0/16], resource_group: rg-mcp-demo}}
+  - {provider: cloudflare, kind: zone, id: "00000000000000000000000000000003", name: mcp-demo.example, attributes: {status: active, paused: false}}
+  - {provider: palo_alto, kind: address_object, id: doc-api, name: doc-api, attributes: {value: 203.0.113.20, value_type: ip-netmask, description: Synthetic documentation endpoint}}

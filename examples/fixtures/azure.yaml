@@ -1,0 +1,3 @@
+schema_version: 1
+resources:
+  - {provider: azure, kind: virtual_network, id: /subscriptions/00000000-0000-4000-8000-000000000002/resourceGroups/rg-mcp-demo/providers/Microsoft.Network/virtualNetworks/vnet-mcp-demo, name: vnet-mcp-demo, location: uksouth, attributes: {address_prefixes: [10.40.0.0/16], resource_group: rg-mcp-demo}}

@@ -1,0 +1,3 @@
+schema_version: 1
+resources:
+  - {provider: cloudflare, kind: zone, id: "00000000000000000000000000000003", name: mcp-demo.example, attributes: {status: active, paused: false}}
