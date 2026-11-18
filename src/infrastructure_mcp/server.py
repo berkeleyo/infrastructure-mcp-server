@@ -68,7 +68,11 @@ def build_server(
         instructions="Read-only infrastructure discovery, drift, validation and bounded diagnostics.",
     )
 
-    @server.tool(annotations=ToolAnnotations(readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=False))
+    @server.tool(
+        annotations=ToolAnnotations(
+            readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=False
+        )
+    )
     async def infrastructure_health() -> dict[str, Any]:
         """Return configuration readiness; this does not assert live connectivity."""
         profiles = []
@@ -100,7 +104,11 @@ def build_server(
                 )
         return _success({"status": "ok", "version": __version__, "profiles": profiles})
 
-    @server.tool(annotations=ToolAnnotations(readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=True))
+    @server.tool(
+        annotations=ToolAnnotations(
+            readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=True
+        )
+    )
     async def discover_infrastructure(profile: str) -> dict[str, Any]:
         """Discover normalized resources from an allowlisted inventory profile."""
         try:
@@ -116,7 +124,11 @@ def build_server(
         except Exception as exc:
             return _failure("discover_infrastructure", exc)
 
-    @server.tool(annotations=ToolAnnotations(readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=True))
+    @server.tool(
+        annotations=ToolAnnotations(
+            readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=True
+        )
+    )
     async def detect_infrastructure_drift(profile: str, desired_state: str) -> dict[str, Any]:
         """Compare discovered resources with an allowlisted desired state."""
         try:
@@ -125,7 +137,11 @@ def build_server(
         except Exception as exc:
             return _failure("detect_infrastructure_drift", exc)
 
-    @server.tool(annotations=ToolAnnotations(readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=False))
+    @server.tool(
+        annotations=ToolAnnotations(
+            readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=False
+        )
+    )
     async def validate_infrastructure_config(profile: str) -> dict[str, Any]:
         """Validate a configured profile without contacting live providers."""
         try:
@@ -146,7 +162,11 @@ def build_server(
         except Exception as exc:
             return _failure("validate_infrastructure_config", exc)
 
-    @server.tool(annotations=ToolAnnotations(readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=True))
+    @server.tool(
+        annotations=ToolAnnotations(
+            readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=True
+        )
+    )
     async def diagnose_dns(
         destination: str, record_types: list[str] | None = None
     ) -> dict[str, Any]:
@@ -161,7 +181,11 @@ def build_server(
         except Exception as exc:
             return _failure("diagnose_dns", exc)
 
-    @server.tool(annotations=ToolAnnotations(readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=True))
+    @server.tool(
+        annotations=ToolAnnotations(
+            readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=True
+        )
+    )
     async def diagnose_tls(destination: str) -> dict[str, Any]:
         """Inspect TLS metadata for an allowlisted public HTTPS destination."""
         try:
@@ -172,7 +196,11 @@ def build_server(
         except Exception as exc:
             return _failure("diagnose_tls", exc)
 
-    @server.tool(annotations=ToolAnnotations(readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=True))
+    @server.tool(
+        annotations=ToolAnnotations(
+            readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=True
+        )
+    )
     async def diagnose_http(destination: str, method: str = "HEAD") -> dict[str, Any]:
         """Make a bounded body-free HTTP diagnostic to an allowlisted destination."""
         try:
@@ -183,7 +211,11 @@ def build_server(
         except Exception as exc:
             return _failure("diagnose_http", exc)
 
-    @server.tool(annotations=ToolAnnotations(readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=False))
+    @server.tool(
+        annotations=ToolAnnotations(
+            readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=False
+        )
+    )
     async def list_available_capabilities() -> dict[str, Any]:
         """List tools, configured providers and resource types without claiming connectivity."""
         providers: set[str] = set()
