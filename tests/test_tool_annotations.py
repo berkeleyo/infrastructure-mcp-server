@@ -19,14 +19,13 @@ def test_every_mcp_tool_declares_all_four_safety_hints() -> None:
     source = Path(__file__).resolve().parents[1] / "src/infrastructure_mcp/server.py"
     tree = ast.parse(source.read_text(encoding="utf-8"))
     functions = {
-        node.name: node
-        for node in ast.walk(tree)
-        if isinstance(node, ast.AsyncFunctionDef)
+        node.name: node for node in ast.walk(tree) if isinstance(node, ast.AsyncFunctionDef)
     }
     for name, open_world in EXPECTED.items():
         decorators = functions[name].decorator_list
         matches = [
-            decorator for decorator in decorators
+            decorator
+            for decorator in decorators
             if isinstance(decorator, ast.Call)
             and isinstance(decorator.func, ast.Attribute)
             and decorator.func.attr == "tool"
