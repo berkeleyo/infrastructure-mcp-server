@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Any
 
 from mcp.server import MCPServer
+from mcp.types import ToolAnnotations
 from mvia.redaction import redact  # type: ignore[import-untyped]
 
 from infrastructure_mcp import __version__
@@ -67,7 +68,11 @@ def build_server(
         instructions="Read-only infrastructure discovery, drift, validation and bounded diagnostics.",
     )
 
-    @server.tool()
+    @server.tool(
+        annotations=ToolAnnotations(
+            read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=False
+        )
+    )
     async def infrastructure_health() -> dict[str, Any]:
         """Return configuration readiness; this does not assert live connectivity."""
         profiles = []
@@ -99,7 +104,11 @@ def build_server(
                 )
         return _success({"status": "ok", "version": __version__, "profiles": profiles})
 
-    @server.tool()
+    @server.tool(
+        annotations=ToolAnnotations(
+            read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=True
+        )
+    )
     async def discover_infrastructure(profile: str) -> dict[str, Any]:
         """Discover normalized resources from an allowlisted inventory profile."""
         try:
@@ -115,7 +124,11 @@ def build_server(
         except Exception as exc:
             return _failure("discover_infrastructure", exc)
 
-    @server.tool()
+    @server.tool(
+        annotations=ToolAnnotations(
+            read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=True
+        )
+    )
     async def detect_infrastructure_drift(profile: str, desired_state: str) -> dict[str, Any]:
         """Compare discovered resources with an allowlisted desired state."""
         try:
@@ -124,7 +137,11 @@ def build_server(
         except Exception as exc:
             return _failure("detect_infrastructure_drift", exc)
 
-    @server.tool()
+    @server.tool(
+        annotations=ToolAnnotations(
+            read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=False
+        )
+    )
     async def validate_infrastructure_config(profile: str) -> dict[str, Any]:
         """Validate a configured profile without contacting live providers."""
         try:
@@ -145,7 +162,11 @@ def build_server(
         except Exception as exc:
             return _failure("validate_infrastructure_config", exc)
 
-    @server.tool()
+    @server.tool(
+        annotations=ToolAnnotations(
+            read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=True
+        )
+    )
     async def diagnose_dns(
         destination: str, record_types: list[str] | None = None
     ) -> dict[str, Any]:
@@ -160,7 +181,11 @@ def build_server(
         except Exception as exc:
             return _failure("diagnose_dns", exc)
 
-    @server.tool()
+    @server.tool(
+        annotations=ToolAnnotations(
+            read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=True
+        )
+    )
     async def diagnose_tls(destination: str) -> dict[str, Any]:
         """Inspect TLS metadata for an allowlisted public HTTPS destination."""
         try:
@@ -171,7 +196,11 @@ def build_server(
         except Exception as exc:
             return _failure("diagnose_tls", exc)
 
-    @server.tool()
+    @server.tool(
+        annotations=ToolAnnotations(
+            read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=True
+        )
+    )
     async def diagnose_http(destination: str, method: str = "HEAD") -> dict[str, Any]:
         """Make a bounded body-free HTTP diagnostic to an allowlisted destination."""
         try:
@@ -182,7 +211,11 @@ def build_server(
         except Exception as exc:
             return _failure("diagnose_http", exc)
 
-    @server.tool()
+    @server.tool(
+        annotations=ToolAnnotations(
+            read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=False
+        )
+    )
     async def list_available_capabilities() -> dict[str, Any]:
         """List tools, configured providers and resource types without claiming connectivity."""
         providers: set[str] = set()
