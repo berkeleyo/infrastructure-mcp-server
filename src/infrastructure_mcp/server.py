@@ -70,7 +70,7 @@ def build_server(
 
     @server.tool(
         annotations=ToolAnnotations(
-            readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=False
+            read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=False
         )
     )
     async def infrastructure_health() -> dict[str, Any]:
@@ -106,7 +106,7 @@ def build_server(
 
     @server.tool(
         annotations=ToolAnnotations(
-            readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=True
+            read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=True
         )
     )
     async def discover_infrastructure(profile: str) -> dict[str, Any]:
@@ -126,7 +126,7 @@ def build_server(
 
     @server.tool(
         annotations=ToolAnnotations(
-            readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=True
+            read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=True
         )
     )
     async def detect_infrastructure_drift(profile: str, desired_state: str) -> dict[str, Any]:
@@ -139,7 +139,7 @@ def build_server(
 
     @server.tool(
         annotations=ToolAnnotations(
-            readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=False
+            read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=False
         )
     )
     async def validate_infrastructure_config(profile: str) -> dict[str, Any]:
@@ -164,7 +164,7 @@ def build_server(
 
     @server.tool(
         annotations=ToolAnnotations(
-            readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=True
+            read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=True
         )
     )
     async def diagnose_dns(
@@ -183,7 +183,7 @@ def build_server(
 
     @server.tool(
         annotations=ToolAnnotations(
-            readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=True
+            read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=True
         )
     )
     async def diagnose_tls(destination: str) -> dict[str, Any]:
@@ -198,7 +198,7 @@ def build_server(
 
     @server.tool(
         annotations=ToolAnnotations(
-            readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=True
+            read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=True
         )
     )
     async def diagnose_http(destination: str, method: str = "HEAD") -> dict[str, Any]:
@@ -213,7 +213,7 @@ def build_server(
 
     @server.tool(
         annotations=ToolAnnotations(
-            readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=False
+            read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=False
         )
     )
     async def list_available_capabilities() -> dict[str, Any]:

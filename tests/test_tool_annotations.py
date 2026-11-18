@@ -37,8 +37,8 @@ def test_every_mcp_tool_declares_all_four_safety_hints() -> None:
         assert annotations.func.id == "ToolAnnotations"
         hints = {k.arg: ast.literal_eval(k.value) for k in annotations.keywords}
         assert hints == {
-            "readOnlyHint": True,
-            "destructiveHint": False,
-            "idempotentHint": True,
-            "openWorldHint": open_world,
+            "read_only_hint": True,
+            "destructive_hint": False,
+            "idempotent_hint": True,
+            "open_world_hint": open_world,
         }, name
